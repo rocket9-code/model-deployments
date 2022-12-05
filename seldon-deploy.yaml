@@ -3,55 +3,29 @@ kind: SeldonDeployment
 metadata:
   name: mlflow
   labels:
-    app.kubernetes.io/managed-by: mlflow-seldon
     app.kubernetes.io/name: mlflow
 spec:
   name: iris
   predictors:
-  - componentSpecs:
-    - spec:
-        # We are setting high failureThreshold as installing conda dependencies
-        # can take long time and we want to avoid k8s killing the container prematurely
-        containers:
-        # - image: seldonio/mlflowserver:1.14.0-dev
-        #   imagePullPolicy: IfNotPresent
-        #   name: classifier
-        - name: classifier
-          livenessProbe:
-            initialDelaySeconds: 800
-            failureThreshold: 20000000
-            periodSeconds: 25
-            successThreshold: 1
-            httpGet:
-              path: /health/ping
-              port: http
-              scheme: HTTP
-          readinessProbe:
-            initialDelaySeconds: 800
-            failureThreshold: 2000000
-            periodSeconds: 25
-            successThreshold: 1
-            httpGet:
-              path: /health/ping
-              port: http
-              scheme: HTTP
-
-    graph:
+  - graph:
       children:
-        - name: node-two
-          mlflowModelName: "MLMFlow-Deployment-Controller-DEMO-01"
+        - name: step-one
+          modelUri: "MLMFlow-Deployment-Controller-DEMO-01"
+          implementation: MLFLOW_SERVER
           type: MODEL
           children: 
-              - name: node-two
-                mlflowModelName: "MLMFlow-Deployment-Controller-DEMO-01-test"
+              - name: step-two
+                modelUri: "MLMFlow-Deployment-Controller-DEMO-01-test"
+                implementation: MLFLOW_SERVER
                 type: MODEL
                 children: []
-        - name: node-two
-          mlflowModelName: "iris demo"
+        - name: step-three
+          implementation: MLFLOW_SERVER
+          modelUri: "iris demo"
           type: MODEL
           children: []
       implementation: MLFLOW_SERVER
-      mlflowModelName: "iris demo"
+      modelUri: "iris demo"
       logger:
         url: http://broker-ingress.knative-eventing.svc.cluster.local/demo/default
         mode: all
