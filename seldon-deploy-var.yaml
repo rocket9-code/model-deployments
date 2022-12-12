@@ -1,0 +1,32 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: mlflow-var
+spec:
+  name: iris
+  predictors:
+  - graph:
+      children:
+        - name: step-one
+          modelUri: mlflow.oss["MLMFlow-Deployment-Controller-DEMO-01"]
+          implementation: MLFLOW_SERVER
+          type: MODEL
+          children: 
+              - name: step-two
+                modelUri: mlflow.oss["iris demo"]
+                implementation: MLFLOW_SERVER
+                type: MODEL
+                children: []
+        - name: step-three
+          implementation: MLFLOW_SERVER
+          modelUri: mlflow.oss["iris demo"]
+          type: MODEL
+          children: []
+      implementation: MLFLOW_SERVER
+      modelUri: mlflow.oss["iris demo"]
+      logger:
+        url: http://broker-ingress.knative-eventing.svc.cluster.local/demo/default
+        mode: all
+      name: classifier
+    name: default
+    replicas: 1
