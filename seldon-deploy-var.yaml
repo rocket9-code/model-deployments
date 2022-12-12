@@ -8,7 +8,7 @@ spec:
   - graph:
       children:
         - name: step-one
-          modelUri: mlflow.oss["MLMFlow-Deployment-Controller-DEMO-01"]
+          modelUri: mlflow.oss_azure["MLMFlow-Deployment-Controller-DEMO-01"]
           implementation: MLFLOW_SERVER
           type: MODEL
           children: 
