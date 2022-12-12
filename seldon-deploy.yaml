@@ -10,22 +10,22 @@ spec:
   - graph:
       children:
         - name: step-one
-          modelUri: "MLMFlow-Deployment-Controller-DEMO-01"
+          modelUri: mlflow.oss["MLMFlow-Deployment-Controller-DEMO-01"]
           implementation: MLFLOW_SERVER
           type: MODEL
           children: 
               - name: step-two
-                modelUri: "iris demo"
+                modelUri: mlflow.oss["iris demo"]
                 implementation: MLFLOW_SERVER
                 type: MODEL
                 children: []
         - name: step-three
           implementation: MLFLOW_SERVER
-          modelUri: "iris demo"
+          modelUri: mlflow.oss["iris demo"]
           type: MODEL
           children: []
       implementation: MLFLOW_SERVER
-      modelUri: "iris demo"
+      modelUri: mlflow.oss["iris demo"]
       logger:
         url: http://broker-ingress.knative-eventing.svc.cluster.local/demo/default
         mode: all
