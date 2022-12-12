@@ -19,7 +19,7 @@ spec:
                 children: []
         - name: step-three
           implementation: MLFLOW_SERVER
-          modelUri: mlflow.oss_blob["iris demo"]
+          modelUri: mlflow.blob["iris demo"]
           type: MODEL
           children: []
       implementation: MLFLOW_SERVER
