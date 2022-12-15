@@ -4,7 +4,6 @@ metadata:
   name: mlflow-var
 spec:
   name: iris
-  protocol: v2
   predictors:
   - graph:
       children:
