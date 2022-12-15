@@ -8,25 +8,25 @@ spec:
   - graph:
       children:
         - name: step-one
-          modelUri: '{{ mlflow.blob["MLMFlow-Deployment-Controller-DEMO-01"] }}'
+          modelUri: '{{ mlflow.blob["iris demo1"] }}'
           envSecretRefName: seldon-rclone-secret
           implementation: MLFLOW_SERVER
           type: MODEL
           children: 
               - name: step-two
-                modelUri: '{{ mlflow.blob["iris demo"] }}'
+                modelUri: '{{ mlflow.blob["iris demo2"] }}'
                 envSecretRefName: seldon-rclone-secret
                 implementation: MLFLOW_SERVER
                 type: MODEL
                 children: []
         - name: step-three
           implementation: MLFLOW_SERVER
-          modelUri: '{{ mlflow.blob["iris demo"] }}'
+          modelUri: '{{ mlflow.blob["iris demo3"] }}'
           envSecretRefName: seldon-rclone-secret
           type: MODEL
           children: []
       implementation: MLFLOW_SERVER
-      modelUri: '{{ mlflow.blob["iris demo"] }}'
+      modelUri: '{{ mlflow.blob["iris demo4"] }}'
       envSecretRefName: seldon-rclone-secret
       logger:
         url: http://broker-ingress.knative-eventing.svc.cluster.local/demo/default
