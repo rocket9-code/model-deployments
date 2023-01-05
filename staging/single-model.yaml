@@ -36,6 +36,7 @@ spec:
     graph:
       implementation: MLFLOW_SERVER
       modelUri: '{{ mlflow.blob["iris demo3"] }}'
+      envSecretRefName: seldon-rclone-secret
       logger:
         url: http://broker-ingress.knative-eventing.svc.cluster.local/demo/default
         mode: all
