@@ -15,8 +15,8 @@ spec:
         #   name: classifier
         - name: classifier
           livenessProbe:
-            initialDelaySeconds: 800
-            failureThreshold: 20000000
+            initialDelaySeconds: 80
+            failureThreshold: 200
             periodSeconds: 25
             successThreshold: 1
             httpGet:
@@ -24,8 +24,8 @@ spec:
               port: http
               scheme: HTTP
           readinessProbe:
-            initialDelaySeconds: 800
-            failureThreshold: 2000000
+            initialDelaySeconds: 80
+            failureThreshold: 200
             periodSeconds: 25
             successThreshold: 1
             httpGet:
